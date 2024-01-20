@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Шашки на двоих</title>
+
+    <!-- css -->
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- иконка -->
+    <!-- <link rel="icon" type="image/x-icon" href="source/New folder/favicon.ico" /> -->
+
+    <!-- шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Yandex Games SDK -->
+    <script src="https://yandex.ru/games/sdk/v2"></script>
+
+  </head>
+  <body>
+    <!-- подключение к серверам яндекса для забора сохранений -->
+
+    <!-- <div class="loadingWindow flex-row" id="loadingWindow" style="background-image: url('source/other/loadingOne.jpg')";></div>
+
+    <div class="secondLoadingWindow flex-row" id="secondLoadingWindow" style="background-image: url('source/other/loadingTwo.jpg')";></div> -->
+
+    <!-- меню -->
+    <div class="menu flex-column" id="menu">
+
+        <div class="gameTypeContainer flex-row">
+
+          <!-- против компьютера -->
+          <div class="gameType flex-column" id="pcSelectButton">
+            <img class="gameTypeTitle" src="source/pcTitle.png" alt="">
+            <img class="gameTypeIconPc" src="source/copmIcon.png" alt="">
+
+            <img src="source/checkIcon.png" class="checkIcon" id="checkIconPc" alt="">
+          </div>
+
+          <!-- один на один -->
+          <div class="gameType flex-column" id="pvpSelectButton" style="justify-content: space-around;">
+            <img class="gameTypeTitle" src="source/pvpTitle.png" alt="">
+            <img class="gameTypeIconPvp" src="source/pvpIcon.png" alt="">
+
+            <img src="source/checkIcon.png" class="checkIcon hiddenCkeckIcon" id="checkIconPvp" alt="">
+          </div>
+        </div>
+
+        <!-- кнопка играть -->
+        <img src="source/play.png" alt="" class="playButton coffeButton" id="playButton" onclick="startGame('fromMenu')">
+
+        <!-- выбор цвета -->
+        <!-- <div class="menuColorChoose flex-row" id="menuColorChoose">
+            <span>белыми</span>
+            <span>черными</span>
+        </div> -->
+
+        <!-- настройки -->
+        <div class="settingsContainer flex-column coffeButton">
+          <img src="source/settingsIcon.png" alt="" class="settingsTitle" id="settingsButton">
+
+          <div class="settingsList flex-column">
+
+            <!-- подсказки -->
+            <div class="flex-row settingLine">
+              <img class="dotListIcon" src="source/dotListIcon.png" alt="" style="padding-bottom: 0.8vh;">
+              <img src="source/cellsGlow.png" alt="" style="height: 3vh;">
+              
+              <!-- варианты -->
+              <img class="setiingsVariant celectedVariant" id="glowSellsYes" src="source/yes.png" alt="" style="height: 4.2vh; margin-left: 4vh;">
+              <img class="setiingsVariant " src="source/no.png" id="glowSellsNo" alt="" style="height: 4.2vh;">
+            </div>
+
+            <!-- сложность -->
+            <div class="flex-row settingLine" style="align-items: flex-start; margin-top: 2vh;">
+              <img class="dotListIcon" src="source/dotListIcon.png" alt="" style="padding-top: 2.5vh;">
+              <img src="source/hardnessLavelPc.png" alt="" style="height: 7vh; margin-top: 2vh;">
+
+              <!-- ванрианты -->
+              <img class="setiingsVariant celectedVariant" id="easyLevel" src="source/easy.png" alt="" style="height: 4vh; margin-left: 2.5vh;">
+              <img class="setiingsVariant" id="hardLevel" src="source/hard.png" alt="" style="height: 4vh;">
+            </div>
+
+            <!-- сторона компьютера -->
+            <div class="flex-row settingLine" style="align-items: flex-start; margin-top: 2vh;">
+              <img class="dotListIcon" src="source/dotListIcon.png" alt="" style="padding-top: 2.5vh;">
+              <img src="source/starts.png" alt="" style="height: 4vh; margin-top: 1vh;">
+
+              <!-- ванрианты -->
+              <img class="setiingsVariant celectedVariant" id="playerStarts" src="source/player.png" alt="" style="height: 4vh; margin-left: 2.5vh;">
+              <img class="setiingsVariant" id="compStarts" src="source/computer.png" alt="" style="height: 4vh;">
+            </div>
+          </div>
+        </div>
+
+    </div>
+
+
+    <!-- игра -->
+    <div class="gameContainer flex-row">
+      <!-- кнопка 'сдаться' -->
+      <!-- <div class="giveUpButtonContainer flex-column">
+        <span id="giveUpButton" onclick="gameEnd('giveUp')">сдаться</span>
+      </div> -->
+
+      <!-- левая колонка с кнопками -->
+      <div class="leftButtonsColumnn flex-column">
+
+        <!-- кнопка 'рестарт' -->
+        <img src="source/restart.png" alt="" class="coffeButton flex-column restartButton" id="restartButton" onclick="restartGame('reset')">
+
+        <!-- кнопка 'в меню' -->
+        <!-- <div class="coffeButton flex-column" id="navToMenuButton" onclick="navToMenu()" style="margin-top: 5vh;">
+          <span>меню</span>
+        </div> -->
+        <img src="source/menu.png" class="coffeButton flex-column menuButton" id="navToMenuButton" onclick="navToMenu()">
+
+        <!-- чей ход -->
+        <!-- <div class="sideInner coffeButton flex-column">
+          <span>Ходят</span>
+          <span id="sideInner">белые</span>
+          <div style="width: 5vh; height: 5vh; border-radius: ;"></div>
+        </div> -->
+
+        <img src="source/whiteMovings.png" alt="" class="sideColorInner coffeButton" id="sideWhiteInner" style="cursor: unset;">
+        <img src="source/blackMovings.png" alt="" class="sideColorInner coffeButton" id="sideBlackInner" style="cursor: unset;">
+
+      </div>
+
+      <!-- поле -->
+      <div class="gameDeck flex-column" id="gameDeck"></div>
+
+      <!-- шашечное поле -->
+      <div class="checkersArray" id="checkersArray"></div>
+
+      <!-- правая колонка -->
+      <!-- <div class="rightButtonsColumnn"> 
+      </div> -->
+
+    </div>
+
+    <!-- модальное окно конца игры -->
+    <div class="gameEndModal flex-column" id="gameEndModal">
+      <!-- поздравления -->
+      <!-- <span>Игра окончена</span> -->
+
+      <!-- итог -->
+      <span id="gameEndTitleInner"></span>
+
+      <img src="source/gameOver.png" alt="" style="width: 120vh;">
+
+      <!-- <img class="resultTitle" src="source/whiteWins.png" alt="" id="resultTitleWhite">
+      <img class="resultTitle" src="source/blackWins.png" alt="" id="resultTitleBlack">
+      <img class="resultTitle" src="source/noOne.png" alt="" id="resultTitleNoOne"> -->
+
+      <!-- победитель -->
+      <img class="resultTitle" src="source/compWins.png" alt="" id="resultTitlecompWins">
+      <img class="resultTitle" src="source/playerWins.png" alt="" id="resultTitleplayerWins">
+      <img class="resultTitle" src="source/whiteWins.png" alt="" id="resultTitleWhite">
+      <img class="resultTitle" src="source/blackWins.png" alt="" id="resultTitleBlack">
+      <!-- <img class="resultTitle" src="source/upPlayerWins.png" alt="" id="resultTitleupPlayerWins">
+      <img class="resultTitle" src="source/downPlayerWins.png" alt="" id="resultTitledownPlayerWins"> -->
+      <img class="resultTitle" src="source/noOne.png" alt="" id="resultTitleNoOne">
+
+      <!-- счёт -->
+      <!-- <div class="scoreInGameContainer" style="display: none;"> -->
+        <!-- надпись 'счёт' -->
+        <!-- <img class="score" src="source/score.png" alt=""> -->
+
+        <!-- контейнер иконок и чисел -->
+        <!-- <div class="flex-row"> -->
+          <!-- белые -->
+          <!-- <div class="flex-column"> -->
+            <!-- иконка -->
+            <!-- <img src="source/whiteDot.png" alt=""> -->
+
+            <!-- счёт -->
+            <!-- <span id="whiteScoreInner"></span> -->
+          <!-- </div> -->
+
+          <!-- черные -->
+          <!-- <div class="flex-column"> -->
+            <!-- иконка -->
+            <!-- <img src="source/blackDot.png" alt=""> -->
+
+            <!-- счёт -->
+            <!-- <span id="blackScoreInner"></span> -->
+          <!-- </div> -->
+        <!-- </div> -->
+      <!-- </div> -->
+
+      <!-- еще партию -->
+      <!-- <div class="coffeButton flex-column nextGameButton" onclick="restartGame('end')" style="margin-top: 5vh;">
+        <span>играть еще</span>
+      </div> -->
+      <img src="source/playMore.png" alt="" class="coffeButton flex-column nextGameButton" onclick="restartGame('end')">
+
+      <!-- кнопка 'в меню' -->
+      <img src="source/menu.png" alt="" class="coffeButton flex-column resultsMenuButton" id="navToMenuButton" onclick="navToMenu(true)">
+    </div>
+
+    <!-- скрипт -->
+    <script src="scripts.js"></script>
+  </body>
+</html>

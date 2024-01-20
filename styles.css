@@ -1,0 +1,641 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    --borderWhite: rgb(85, 182, 212);
+    --backBlue: #2eabff;
+    --backBlueHover: #0082d6;
+
+    --coffe: #e1bfa2;
+    --coffeDeep: #dda269;
+    --coffeDark: #9f7a5a;
+    --coffeBlack: #856248;
+    --coffeBlackFull: #6e4e37;
+    --coffePink: #e5bcbc;
+
+    /* --coffeDeep: #d6ac85; */
+    /* --coffeDeep: #daa676; */
+    /* --coffeDeep: #dda269; */
+    /* --coffeDark: #6e4e37; */
+}
+
+body {
+    font-size: 40px;
+    color: white;
+    /* width: 100vw !important; */
+    height: 100vh !important;
+    overflow: hidden;
+    background-color: rgb(11, 10, 15);
+    background-size: cover;
+
+    /* font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
+}
+
+/* убираем longtap для IOS */
+body, *, span, div {
+    -webkit-touch-callout: none; /* Отключение контекстного меню (iOS) */
+    -webkit-user-select: none; /* Запрещение выделения текста (iOS) */
+    -khtml-user-select: none; /* Запрещение выделения текста (Konqueror) */
+    -moz-user-select: none; /* Запрещение выделения текста (Firefox) */
+    -ms-user-select: none; /* Запрещение выделения текста (Internet Explorer/Edge) */
+    user-select: none; /* Запрещение выделения текста (стандартный) */
+}
+
+/* flex */
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.h1 {
+    font-size: 8vh;
+    font-weight: 600;
+    color: rgb(0, 129, 15);
+    border: 1vh solid var(--borderWhite);
+    border-radius: 50vh;
+    padding: 0 3vh 1vh;
+    text-align: center;
+}
+
+.h2 {
+    font-size: 4vh;
+    /* font-weight: 600; */
+    /* color: rgb(0, 154, 18);
+    border: 1vh solid rgb(0, 154, 18); */
+    background-color: var(--backBlue);
+    color: white;
+    border: 1vh solid var(--borderWhite);
+    border-radius: 6vh;
+    padding: 1vh 4vh;
+    text-align: center;
+}
+
+/* КНОПКИ */
+
+/* общий стиль кнопки */
+.coffeButton {
+    background-color: var(--coffeDeep);
+    color: #6e4e37;
+    border: 1vh solid var(--coffeDark);
+    border-radius: 5vh;
+    font-size: 5vh;
+    /* font-weight: 600; */
+    padding: 3vh;
+    padding-bottom: 4vh;
+    /* margin: 0 7vh; */
+    cursor: pointer;
+}
+
+/* иконка видео */
+.playVideoIconContainer {
+    font-size: 3vh;
+    background-color: rgb(24, 96, 0);
+    padding: 2vh 4vh;
+    cursor: pointer;
+}
+.playVideoIconContainerHover {
+    border: 1vh solid var(--borderWhite);
+    background-color: rgb(21, 84, 0);
+}
+.playVideoIcon {
+    margin-bottom: 2vh;
+    width: 15vh;
+}
+
+/* кнопка закрыть */
+.closeIcon {
+    position: absolute;
+    top: 2vh;
+    right: 2vh;
+    width: 4vw;
+    cursor: pointer;
+}
+.closeIconHover {
+    filter: contrast(130%);
+}
+
+
+
+/* окно загрузки */
+.loadingWindow {
+    z-index: 12;
+    /* анимация */
+    transition: all 0.3s ease; /* Добавляем вендорный префикс для Webkit браузеров (например, Safari) */
+    -webkit-transition: all 0.3s ease;
+}
+
+.secondLoadingWindow {
+    z-index: 11 !important;
+    /* анимация */
+    transition: all 0.7s ease; /* Добавляем вендорный префикс для Webkit браузеров (например, Safari) */
+    -webkit-transition: all 0.7s ease;
+}
+
+.loadingWindow, .secondLoadingWindow {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(11, 10, 15);
+    color: white;
+    font-size: 12vh;
+    background-size: cover;
+    opacity: 1;
+
+    /* этот чёткий, как Валюха */
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    /* этот класс */
+    /* font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
+    /* этот хороший, но фуееее */
+    /* font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; */
+}
+
+
+
+
+.hiddenElement {
+    opacity: 0 !important;
+    transition: opacity 0.3s ease-in-out;
+    -webkit-transition: opacity 0.3s ease-in-out;
+}
+.displaynoneElement {
+    display: none !important;
+}
+/* .showedElement {
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+    -webkit-transition: opacity 0.3s ease-in-out;
+} */
+
+
+
+
+/* ---------------------------------------------------------------- */
+/* ---------------------------------------------------------------- */
+/* ---------------------------------------------------------------- */
+/* ---------------------------------------------------------------- */
+/* ---------------------------------------------------------------- */
+/* ---------------------------------------------------------------- */
+/* ---------------------------МЕНЮ--------------------------------- */
+/* ---------------------------------------------------------------- */
+/* ---------------------------------------------------------------- */
+/* ---------------------------------------------------------------- */
+/* ---------------------------------------------------------------- */
+/* ---------------------------------------------------------------- */
+/* ---------------------------------------------------------------- */
+
+
+/* меню */
+.menu {
+    width: 100vw;
+    height: 100vh;
+    justify-content: space-around;
+    background-color: var(--coffe);
+    position: absolute;
+    background-image: url("source/back.jpg");
+    background-size: cover;
+    background-position: bottom;
+    z-index: 6;
+    /* display: none; */
+    /* opacity: 1; */
+    transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    /* left: 30vw; */
+}
+
+/* контейнер кнопок режима игры */
+/* .gameTypeContainer {
+
+} */
+
+/* кнопки выбора режима */
+.gameType {
+    background-color: var(--coffeDeep);
+    color: #6e4e37;
+    border: 1vh solid var(--coffeDark);
+    border-radius: 5vh;
+    font-size: 5vh;
+    /* font-weight: 600; */
+    padding: 3vh;
+    margin: 0 7vh;
+    height: 22vh;
+    cursor: pointer;
+    position: relative;
+}
+/* галочка выбранного режим игры */
+.checkIcon {
+    position: absolute;
+    border: 0.6vh solid var(--coffeBlackFull);
+    border-radius: 4vh;
+    /* border-radius: 2.5vh; */
+    padding: 1vh;
+    width: 4vh;
+    top: -3vh;
+    right: -4vh;
+    background-color: var(--coffePink);
+}
+.hiddenCkeckIcon {
+    visibility: hidden;
+}
+
+.gameTypeTitle {
+    width: 30vh;
+    margin-bottom: 4vh;
+}
+.gameTypeIconPc {
+    height: 11vh;
+}
+.gameTypeIconPvp {
+    height: 10vh;
+}
+
+/* выбор стороны */
+.menuColorChoose {
+    width: 100vw;
+    height: 100vh;
+    justify-content: space-around;
+    background-color: white;
+    position: absolute;
+    background-image: url("source/back.jpg");
+    background-size: cover;
+    background-position: bottom;
+    color: black;
+    z-index: 7;
+
+    display: none;
+}
+
+
+/* кнопка начала игры */
+.playButton {
+    height: 7vh;
+    padding-bottom: 1vh;
+    cursor: pointer;
+    background-color: var(--coffePink);
+}
+
+
+
+
+/* настройки */
+.settingsContainer {
+    cursor: unset !important;
+}
+/* надпись'настройки' */
+.settingsTitle {
+    height: 5vh;
+}
+/* список настроек */
+.settingsList {
+    align-items: flex-start;
+    margin-top: 3vh;
+    height: 23vh;
+    justify-content: space-between;
+}
+/* точка для списка */
+.dotListIcon {
+    height: 1vh;
+    opacity: 0.8;
+    margin-right: 1.6vh;
+}
+/* вариант для выбора */
+.setiingsVariant {
+    cursor: pointer;
+    border-radius: 3vh;
+    padding: 0.7vh;
+}
+/* выбранный вариант */
+.celectedVariant {
+    cursor: pointer;
+    padding: 0.3vh !important;
+    border: 0.4vh solid var(--coffeBlack);
+    background-color: var(--coffePink);
+}
+
+
+/* ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------ */
+/* -----------------------------игра--------------------------------- */
+/* ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------ */
+
+
+
+
+/* контейнер игры */
+.gameContainer {
+    width: 100vw;
+    height: 100vh;
+    background-color: #e1bfa2;
+}
+
+/* левая колонка с кнопками */
+.leftButtonsColumnn {
+    position: absolute;
+    left: 5vh;
+    top: 5vh;
+    z-index: 4;
+    width: fit-content;
+    align-items: flex-start !important;
+}
+
+
+/* кнопка 'рестарт' */
+.restartButtonContainer {
+    position: absolute;
+    left: 5vh;
+    top: 5vh;
+    z-index: 4;
+    color: black;
+    border: 1vh solid purple;
+    border-radius: 5vh;
+    padding: 3vh;
+    cursor: pointer;
+}
+
+.restartButton {
+    height: 7vh;
+    padding: 1.7vh !important;
+    padding-bottom: 1.3vh !important;
+    background-color: var(--coffePink) !important;
+}
+
+.menuButton {
+    height: 7vh;
+    padding: 1.7vh !important;
+    padding-bottom: 1.3vh !important;
+    margin-top: 5vh;
+    background-color: var(--coffePink) !important;
+}
+
+/* кнопка 'сдаться' */
+.giveUpButtonContainer {
+    position: absolute;
+    left: 5vh;
+    top: 5vh;
+    z-index: 4;
+    color: black;
+    border: 1vh solid purple;
+    border-radius: 5vh;
+    padding: 3vh;
+    cursor: pointer;
+}
+
+/* чей ход */
+.sideInner {
+    left: 5vh;
+    margin-top: 5vh;
+    z-index: 4;
+    color: var(--coffeBlack);
+    background-color: var(--coffePink);
+}
+
+.sideColorInner {
+    left: 5vh;
+    padding: 1vh 2vh !important;
+    margin-top: 5vh;
+    height: 11vh;
+    z-index: 4;
+    background-color: var(--coffeDeep);
+    display: none;
+}
+
+
+/* правая колонка */
+.rightButtonsColumnn {
+    position: absolute;
+    right: 5vh;
+    top: 5vh;
+    z-index: 4;
+    align-items: flex-start !important;
+    width: fit-content;
+}
+
+/* счет по партиям (в игре) */
+.scoreInGameContainer {
+    position: absolute;
+}
+.score {
+    height: 7vh;
+}
+
+
+/* игровое поле */
+.gameDeck {
+    height: 100vh;
+    width: 100vh;
+    z-index: 1 !important;
+    position: relative;
+}
+/* поворот поля */
+.rotateField {
+    transform: rotate(180deg);
+}
+/* ряд ячеек */
+.deckRow {
+    width: calc(100vh);
+    height: calc(100vh / 8);
+}
+
+/* ячейка */
+.cell {
+    width: calc(100vh / 8);
+    height: calc(100vh / 8);
+    z-index: 2 !important;
+    transition: all 0.3s ease-out;
+}
+.whiteCell {
+    background-color :#60321b;
+}
+.blackCell {
+    background-color: #f9f0d2;
+}
+/* возможная клетка для хода */
+.cellToMove {
+    background-color: green;
+    cursor: pointer;
+}
+
+
+
+
+/*//////////////////
+/////////////////////
+///////ШАШКИ/////////
+/////////////////////
+///////////////////*/
+
+/* шашечное поле */
+.checkersArray {
+    height: 100vh;
+    width: 100vh;
+    position: absolute;
+}
+
+/* шашка */
+.checker {
+    position: absolute;
+    width: calc(100vh / 8 * 0.8);
+    height: calc(100vh / 8 * 0.8);
+    border: calc(100vh / 8 * 0.1) solid;
+    border-radius: 50%;
+    border-color: #9e7959;
+    transition: top 0.3s ease-out, left 0.3s ease-out, background-color 0.1s ease-out !important;
+    -webkit-transition: top 0.3s ease-out, left 0.3s ease-out, background-color 0.1s ease-out !important;
+    cursor: pointer;
+    /* transition: left 0.3s ease-out;
+    transition: top 0.3s ease-out; */
+    /* transition: left 0.3s ease-out; */
+    /* transition: translateX 0.3s ease-out;
+    transition: translateY 0.3s ease-out; */
+    z-index: 3;
+}
+
+/* белые */
+.whiteChecker {
+    background-color: white;
+    /* border-color: black; */
+}
+.whiteCheckerSelected {
+    background-color: rgb(255, 255, 152);
+    transition: background-color 0.3s ease-out;
+    -webkit-transition: background-color 0.3s ease-out;
+    z-index: 4 !important;
+    /* border-color: black; */
+}
+
+/* черные */
+.blackChecker {
+    background-color: black;
+    /* transition: all 0.1s ease-in-out; */
+    /* border-color: white; */
+}
+.blackCheckerSelected {
+    /* background-color: rgb(82, 0, 0); */
+    background-color: rgb(0, 55, 3);
+    transition: background-color 0.3s ease-out;
+    -webkit-transition: background-color 0.3s ease-out;
+    /* transition: all 0.1s ease-in-out; */
+    z-index: 4 !important;
+    /* border-color: white; */
+}
+.whiteCheckerSelectedCopm {
+    z-index: 4 !important;
+}
+.blackCheckerSelectedCopm {
+    z-index: 4 !important;
+}
+
+/* правильные шашки для хода */
+.riteWhiteCheckerToAttack {
+    background-color: rgb(255, 255, 152) !important;
+    transition: background-color 0.3s ease-out;
+    -webkit-transition: background-color 0.3s ease-out;
+    /* transition: all 0.1s ease-in-out; */
+}
+.riteBlackCheckerToAttack {
+    background-color: rgb(0, 55, 3) !important;
+    transition: background-color 0.3s ease-out;
+    -webkit-transition: background-color 0.3s ease-out;
+    /* transition: all 0.1s ease-in-out; */
+}
+
+/* дамки */
+.kingChecker {
+    background-image: url(source/king.png);
+    background-position: center;
+    background-size: cover;
+}
+.whiteKingChecker {
+    background-image: url(source/king.png);
+    background-position: center;
+    background-size: cover;
+}
+.blackKingChecker {
+    /* background-image: ; */
+    background-position: center;
+    background-size: cover;
+}
+
+/* побитая шашка */
+.tempBitedChecker {
+    border-color: red !important;
+}
+
+
+
+
+
+
+
+
+
+/* ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------ */
+/* -----------------------------результаты--------------------------- */
+/* ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------ */
+
+
+
+/* модальное окно конца игры */
+.gameEndModal {
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    background-color: var(--coffe);
+    /* display: none; */
+    /* opacity: 0; */
+    transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    z-index: 5;
+    top: 0;
+}
+
+.resultsMenuButton {
+    position: absolute;
+    top: 5vh;
+    left: 5vh;
+    background-color: var(--coffePink) !important;
+    height: 7vh;
+    padding: 1.7vh !important;
+    padding-bottom: 1.5vh !important; 
+}
+
+.resultTitle {
+    height: 10vh;
+}
+
+.nextGameButton {
+    position: absolute;
+    bottom: 7vh;
+    height: 10vh;
+    padding: 2vh !important;
+}
